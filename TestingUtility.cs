@@ -8,7 +8,7 @@
     
     public static class TestingUtility
     {
-        public static void RunThreadAffiniatedAction(Func<Task> taskFunc, bool outputDebugInfo = false)
+        public static void RunThreadAffiliatedMethod(Func<Task> taskFunc, bool outputDebugInfo = false)
         {
 
             Dispatcher dispatcher = null;
