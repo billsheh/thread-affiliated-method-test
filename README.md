@@ -18,11 +18,11 @@ The basic usage is rather simple, to test the following method, excepted from St
         }
         
         [Test]
-        public void RunThreadAffiniatedAction_Test()
+        public void PrintThreadInfo_Test()
         {
             Console.WriteLine("Testing thread Id {0}", Thread.CurrentThread.ManagedThreadId);
 
-            TestingUtility.RunThreadAffiniatedAction(() => PrintThreadInfo());
+            TestingUtility.RunThreadAffiliatedMethod(() => PrintThreadInfo());
            
         }
         
@@ -33,5 +33,5 @@ It can also work with exception test, shown below:
         public void Exception_Test()
         {
             
-            TestingUtility.RunThreadAffiniatedAction(async () => { throw new Exception("Test exception"); });
+            TestingUtility.RunThreadAffiliatedMethod(async () => { throw new Exception("Test exception"); });
         }
