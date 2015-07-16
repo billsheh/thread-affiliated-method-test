@@ -40,5 +40,5 @@ Internals
 
 There are other ways to write such kind of testing utility, like using thread affiliated scheduler[1] or DispatcherSynchronizationContext[2], but those are not easy to understand. Here I am following the very basic approach: create a message pump(i.e., Dispatcher) and pump message(method to be tested) into the message loop. Once the method is executed, exit the message loop(Dispatcher). Turn on the second debug flag, you will see some useful thread exectuing information.
 
-[1] Stephen Toub - http://blogs.msdn.com/b/pfxteam/archive/2012/01/20/10259049.aspx
+[1] Stephen Toub - http://blogs.msdn.com/b/pfxteam/archive/2012/01/20/10259049.aspx 
 [2] http://www.journeyofcode.com/custom-taskscheduler-sta-threads/
