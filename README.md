@@ -16,7 +16,9 @@ The basic usage is rather simple, to test the following method, excepted from St
             }
             foreach (var pair in d) Console.WriteLine(pair);
         }
-        
+
+The method above will output one line in a thread affiliated enviroment but it will output multiple lines in a thread pool enviroment.
+
         [Test]
         public void PrintThreadInfo_Test()
         {
@@ -40,5 +42,5 @@ Internals
 
 There are other ways to write such kind of testing utility, like using thread affiliated scheduler[1] or DispatcherSynchronizationContext[2], but those are not easy to understand. Here I am following the very basic approach: create a message pump(i.e., Dispatcher) and pump message(method to be tested) into the message loop. Once the method is executed, exit the message loop(Dispatcher). Turn on the second debug flag, you will see some useful thread exectuing information.
 
- [1] Stephen Toub - http://blogs.msdn.com/b/pfxteam/archive/2012/01/20/10259049.aspx 
- [2] Custom Scheduler - http://www.journeyofcode.com/custom-taskscheduler-sta-threads/
+        [1] Stephen Toub - http://blogs.msdn.com/b/pfxteam/archive/2012/01/20/10259049.aspx 
+        [2] Custom Scheduler - http://www.journeyofcode.com/custom-taskscheduler-sta-threads/
