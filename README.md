@@ -16,6 +16,15 @@ The basic usage is rather simple, to test the following method, excepted from St
             }
             foreach (var pair in d) Console.WriteLine(pair);
         }
+        
+        [Test]
+        public async void PrintThreadInfo_ThreadPool_Test()
+        {
+            await Task.Run(async () =>
+            {
+                await PrintThreadInfo();
+            });
+        }
 
 The method above will output one line in a thread affiliated enviroment but it will output multiple lines in a thread pool enviroment.
 
@@ -25,7 +34,6 @@ The method above will output one line in a thread affiliated enviroment but it w
             Console.WriteLine("Testing thread Id {0}", Thread.CurrentThread.ManagedThreadId);
 
             TestingUtility.RunThreadAffiliatedMethod(() => PrintThreadInfo());
-           
         }
         
 It can also work with exception test, shown below:
@@ -34,7 +42,6 @@ It can also work with exception test, shown below:
         [ExpectedException("System.Exception", ExpectedMessage = "Test exception")]
         public void Exception_Test()
         {
-            
             TestingUtility.RunThreadAffiliatedMethod(async () => { throw new Exception("Test exception"); });
         }
 
