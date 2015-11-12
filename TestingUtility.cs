@@ -5,7 +5,6 @@
     using System.Threading;
     using System.Threading.Tasks;
     using System.Windows.Threading;
-    
     public static class TestingUtility
     {
         public static void RunThreadAffiliatedMethod(Func<Task> taskFunc, bool outputDebugInfo = false)
@@ -38,6 +37,9 @@
                 if (outputDebugInfo)
                     Console.WriteLine("Exit action thread dispatcher");
             }));
+
+            actionThread.SetApartmentState(ApartmentState.STA);
+
             actionThread.Start();
 
             if (outputDebugInfo)
@@ -92,9 +94,10 @@
 
                     }
                     else
-                    throw aggreException.Flatten();
+                        throw aggreException.Flatten();
 
-                }else
+                }
+                else
                 {
                     throw actionException;
                 }
