@@ -45,6 +45,27 @@ It can also work with exception test, shown below:
             TestingUtility.RunThreadAffiliatedMethod(async () => { throw new Exception("Test exception"); });
         }
 
+What it means to testing
+
+This simple utility can be used to test all UI such as a dialog, View Models, etc which must be running in a dedicated thread. You will find the testing quite complex if you refers to the PRISM reference implementations. With this utility you can write testing code like this:
+
+        [TestMethod]
+        public void OpenFolderDialog_Test()
+        {
+            TestingUtility.RunThreadAffiliatedMethod(async () =>
+            {
+                var dialog = new CommonOpenFileDialog();
+                dialog.IsFolderPicker = true;
+                dialog.Title = "Test dialog";
+                CommonFileDialogResult result = dialog.ShowDialog();
+                if (result != CommonFileDialogResult.Ok)
+                    return;
+                else
+                    Trace.WriteLine(dialog.FileName);
+            });
+        }
+
+
 Internals
 
 There are other ways to write such kind of testing utility, like using thread affiliated scheduler[1] or DispatcherSynchronizationContext[2], but those are not easy to understand. Here I am following the very basic approach: create a message pump(i.e., Dispatcher) and pump message(method to be tested) into the message loop. Once the method is executed, exit the message loop(Dispatcher). Turn on the second debug flag, you will see some useful thread exectuing information.
